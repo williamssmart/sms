@@ -26,12 +26,14 @@
                   <th>Class</th>
                   <th>Action</th>
                 </tr>
+                @foreach ($students as $student)
                 <tr>
-                  <td>183</td>
-                  <td>John Doe</td>
-                  <td>JSS 1</td>
+                  <td>{{$student->id}}</td>
+                  <td>{{$student->firstname .' '. $student->lastname }}</td>
+                  <td>{{$student->grade}}</td>
                   <td><i class="fa fa-edit"></i></td>
                 </tr>
+                @endforeach
               </table>
             </div>
             <!-- /.box-body -->

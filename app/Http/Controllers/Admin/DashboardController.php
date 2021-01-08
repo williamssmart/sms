@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -14,14 +18,37 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $teacher_count = 20;
-        $no_of_females = 50; 
-        $no_of_male = 100;
-        $no_of_parent = 66;
+        $teacher_count = count(User::where('priv' ,'=',2)->get()); 
+        $no_of_females = count(Student::where('gender' ,'=','Female')->get()); 
+        $no_of_male = count(Student::where('gender' ,'=','Male')->get());
+        $no_of_parent = count(Student::where('gender' ,'=',3)->get()); 
         
         $count = ['teachers' => $teacher_count, 'female_students'=>$no_of_females, 'male_students'=> $no_of_male, 'parents'=> $no_of_parent];
         
         return view('admin/dashboard')->with(['count' => $count]);
+    }
+
+
+    public function student(){
+        $students = Student::join('grades','students.gradeID','=', 'grades.id')->select(['students.id', 'firstname','lastname', 'grade'])->paginate(20);
+        return view('admin/students')->with(['students' => $students]);
+    }
+
+    public function resetpassword(){
+        return view('admin/reset-password');
+    }
+
+    public function storepassword(Request $request){
+        $request->validate([
+            'password' => 'required|min:6|string|confirmed',
+        ]);
+
+        $password = Hash::make($request->password); 
+        $user = Auth::user();
+        $user->password = $password;
+
+        $user->save();
+        return redirect()->back()->with(['message' => 'password updated successfully']);
     }
 
     /**

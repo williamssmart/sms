@@ -15,13 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin', 'Admin\DashboardController@index');
 
-Route::get('/admin/students', function (){
-  return view('admin/students');
-});
+Route::get('/admin/students','Admin\DashboardController@student');
 
-Route::get('/admin/reset-password', function (){
-  return view('admin/reset-password');
-});
+Route::get('/admin/reset-password', 'Admin\DashboardController@resetpassword');
+Route::post('/admin/reset-password', 'Admin\DashboardController@storepassword');
+//Route::post('/admin/reset-password', 'Admin\DashboardController@storepassword');
 
 Route::get('/admin/message-inbox', function (){
   return view('admin/composer');
