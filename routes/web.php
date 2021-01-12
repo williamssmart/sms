@@ -19,16 +19,20 @@ Route::get('/admin/students','Admin\DashboardController@student');
 
 Route::get('/admin/reset-password', 'Admin\DashboardController@resetpassword');
 Route::post('/admin/reset-password', 'Admin\DashboardController@storepassword');
+
+Route::get('admin/add-user', 'Admin\UserManagementController@addUsers');
+Route::post('admin/add-user', 'Admin\UserManagementController@storeUsers');
+Route::get('admin/users', 'Admin\UserManagementController@listUsers');
+
+Route::get('admin/register-student', 'Admin\UserManagementController@addStudents');
+Route::post('admin/register-student', 'Admin\UserManagementController@storeStudents');
 //Route::post('/admin/reset-password', 'Admin\DashboardController@storepassword');
 
 Route::get('/admin/message-inbox', function (){
   return view('admin/composer');
 });
 
-Route::get('/admin/register-student', function (){
-  return view('admin/ui');
-});
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

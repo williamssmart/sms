@@ -19,8 +19,8 @@ class DashboardController extends Controller
     public function index()
     {
         $teacher_count = count(User::where('priv' ,'=',2)->get()); 
-        $no_of_females = count(Student::where('gender' ,'=','Female')->get()); 
-        $no_of_male = count(Student::where('gender' ,'=','Male')->get());
+        $no_of_females = count(Student::where('gender' ,'=','female')->get()); 
+        $no_of_male = count(Student::where('gender' ,'=','male')->get());
         $no_of_parent = count(Student::where('gender' ,'=',3)->get()); 
         
         $count = ['teachers' => $teacher_count, 'female_students'=>$no_of_females, 'male_students'=> $no_of_male, 'parents'=> $no_of_parent];

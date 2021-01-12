@@ -23,13 +23,6 @@
             blinded by desire, that they cannot foresee</p>
               </textarea>
               </div>
-              <div class="form-group">
-                <div class="btn btn-default btn-file">
-                  <i class="fa fa-paperclip"></i> Attachment
-                  <input type="file" name="attachment">
-                </div>
-                <p class="help-block">Max. 32MB</p>
-              </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

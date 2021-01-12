@@ -4,28 +4,93 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Student;
+use App\Models\Grade;
+use App\Traits\UploadImage;
+use App\Traits\RegNumberGenarator;
 
 class UserManagementController extends Controller
 {
+  use UploadImage;
+  use RegNumberGenarator;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function addUsers()
     {
-        //
+        return view('admin/add-users');
+    }
+    
+    public function storeUsers(Request $request)
+    {
+      $user = $request->validate([
+          'firstname' => 'required|string|max:100',
+          'lastname' => 'required|string',
+          'email' => 'required|email|unique:users|max:225',
+          'password' => 'required|min:8|string',
+          'dateofbirth' => 'required|date',
+          'gender' => 'required|string',
+          'phonenumber' => 'required|string',
+          'passport'=> 'required',
+          'priv' => 'required'
+          ]);
+        
+        $user['passport'] = $this->UploadImage($request->file('passport'));
+    
+       User::create($user);
+      return redirect()->back()->with(['status' => 'user added successfully']);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function addStudents()
     {
-        //
+      $grades = Grade::all();
+        return view('admin/add-student')->with(['grades' => $grades]);
     }
+    
+    public function storeStudents(Request $request)
+    {
+      $student  = $request->validate([
+        'firstname' => 'required|string|max:100',
+        'middlename' => 'required|string|max:100',
+        'lastname' => 'required|string|max:100',
+        'gender' => 'required|string|max:100',
+        'bloodgroup' => 'string|max:5',
+        'nationality' => 'required|string',
+        'dateofbirth' => 'required',
+        'height' => 'max:15',
+        'weight' => 'max:15',
+        'homelanguage'  =>  'nullable|string',
+        'icename1'    => 'required|string|max:100',
+        'relationship1' => 'required|string|max:100',
+        'phone1' => 'required|string|max:100',
+        'icename2' => 'nullable|string|max:100',
+        'relationship2' => 'nullable|string|max:100',
+        'phone2' => 'nullable|string|max:100',
+        'passport' => 'required',
+         'parentID' => 'required',
+         'gradeID' => 'required'
+        ]);
+        
+        $student['passport'] = $this->UploadImage($request->file('passport'));
+        $student['regnumber'] = $this->genarator();
+   
+   
+      Student::create($student);
+     return redirect()->back()->with(['status' => 'students registered  successfully']);
+    }
+    
+    
+    public function listUsers(){
+      $user = User::all();
+  
+      return view('admin/users')->with(['users' => $user]);
+    }
+    /**
+
 
     /**
      * Store a newly created resource in storage.

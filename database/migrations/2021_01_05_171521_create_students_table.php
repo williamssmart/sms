@@ -36,7 +36,7 @@ class CreateStudentsTable extends Migration
             $table->string('phone2')->nullable();
             $table->string('regnumber');
             $table->string('passport');
-            $table->boolean('feespaid');
+            $table->boolean('feespaid')->default(0);
             $table->timestamps();
         });
     }

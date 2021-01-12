@@ -263,8 +263,7 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('/admin')}}"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-            <li><a href="{{url('/admin/students')}}"><i class="fa fa-link"></i> <span>Students</span></a></li>
+            <li><a href="{{url('/teacher/students')}}"><i class="fa fa-link"></i> <span>Students</span></a></li>
             <li><a href="{{url('/admin/reset-password')}}"><i class="fa fa-link"></i> <span>change password</span></a></li>
           </ul>
         </li>
@@ -292,32 +291,6 @@ desired effect
             <li><a href="#"><i class="fa fa-link"></i> <span>Add User</span></a></li>
             <li><a href="{{url('/admin/create-news')}}"><i class="fa fa-link"></i> <span>Compose</span></a></li>
             <li><a href="{{url('/admin/news-inbox')}}"><i class="fa fa-link"></i> <span>Inbox</span></a></li>
-          </ul>
-        </li>
-        
-        <li class="treeview">
-          <a href="#"><i class="fa fa-user"></i> <span>User Management</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('/admin/register-student')}}"><i class="fa fa-link"></i> <span>Add Student</span></a></li>
-            <li><a href="{{url('/admin/add-user')}}"><i class="fa fa-link"></i> <span>Add User</span></a></li>
-            <li><a href="{{url('/admin/users')}}  "><i class="fa fa-link"></i> <span>List Users</span></a></li>
-          </ul>
-        </li>
-        
-        <li class="treeview">
-          <a href="#"><i class="fa fa-cog"></i> <span>Settings</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-link"></i> <span>Session And Year</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Teacher/Class Management</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Manage Tution</span></a></li>
           </ul>
         </li>
       </ul>

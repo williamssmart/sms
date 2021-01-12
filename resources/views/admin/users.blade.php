@@ -20,15 +20,17 @@
                   <th>Gender</th>
                   <th>Action</th>
                 </tr>
+                @foreach ($users as $user)
                 <tr>
-                  <td>183</td>
-                  <td>John Doe</td>
-                  <td>JSS 1</td>
-                  <td>183</td>
-                  <td>John Doe</td>
-                  <td>JSS 1</td>
+                  <td>{{$user->id}}</td>
+                  <td>{{$user->firstname . ' ' . $user->lastname}}</td>
+                  <td>{{$user->email}}</td>
+                  <td>{{$user->phonenumber}}</td>
+                  <td>{{($user->priv == 1 ? 'Admin' : $user->priv == 2) ? 'Teacher' : 'Parent'}}</td>
+                  <td>{{$user->gender}}</td>
                   <td><i class="fa fa-edit"></i></td>
                 </tr>
+                @endforeach
               </table>
             </div>
             <!-- /.box-body -->
