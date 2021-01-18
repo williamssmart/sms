@@ -13,24 +13,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', 'Admin\DashboardController@index');
+Route::group(['middleware' => ['auth','can:isAdmin'], 'prefix' => 'admin'], function () {
+  Route::get('/', 'Admin\DashboardController@index');
+  Route::get('/students','Admin\DashboardController@student');
+  Route::get('reset-password', 'Admin\DashboardController@resetpassword');
+  Route::post('reset-password', 'Admin\DashboardController@storepassword');
+  Route::get('add-user', 'Admin\UserManagementController@addUsers');
+  Route::post('/add-user', 'Admin\UserManagementController@storeUsers');
+  Route::get('/users', 'Admin\UserManagementController@listUsers');   
+  Route::get('/register-student', 'Admin\UserManagementController@addStudents');
+  Route::post('/register-student', 'Admin\UserManagementController@storeStudents');
+Route::get('/view-student', 'Admin\UserManagementController@viewStudent');
 
-Route::get('/admin/students','Admin\DashboardController@student');
-
-Route::get('/admin/reset-password', 'Admin\DashboardController@resetpassword');
-Route::post('/admin/reset-password', 'Admin\DashboardController@storepassword');
-
-Route::get('admin/add-user', 'Admin\UserManagementController@addUsers');
-Route::post('admin/add-user', 'Admin\UserManagementController@storeUsers');
-Route::get('admin/users', 'Admin\UserManagementController@listUsers');
-
-Route::get('admin/register-student', 'Admin\UserManagementController@addStudents');
-Route::post('admin/register-student', 'Admin\UserManagementController@storeStudents');
-//Route::post('/admin/reset-password', 'Admin\DashboardController@storepassword');
-
-Route::get('/admin/message-inbox', function (){
-  return view('admin/composer');
+ Route::post('session-setting', 'Admin\SettingController@storeSession');
+ Route::get('session-setting', 'Admin\SettingController@setSession');
+ 
+ Route::get('tution-setting', 'Admin\SettingController@setTution');
+ Route::post('tution-setting', 'Admin\SettingController@storeTution');
+ 
+ Route::post('asign-teacher', 'Admin\SettingController@asignTeacher');
+ 
+ Route::get('class-management', 'Admin\SettingController@setClassDetails');
+ 
+ Route::post('create-grade', 'Admin\SettingController@createClass');
+ 
 });
+
+Route::resource('newslatter' , 'NewslatterController');
+
+Route::group(['middleware' => ['auth','can:isTeacher'],  'prefix' => 'teacher'], function () {
+    Route::resource('course-video', 'Teacher\CourseVideoController');
+    Route::get('students', 'Teacher\DashboardController@student');
+    Route::get('reset-password', 'Teacher\DashboardController@resetpassword');
+});
+
+
 
 
 

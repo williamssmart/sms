@@ -5,7 +5,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Responsive Hover Table</h3>
+              <h3 class="box-title">Students</h3>
 
               <div class="box-tools">
                 <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
@@ -31,7 +31,7 @@
                   <td>{{$student->id}}</td>
                   <td>{{$student->firstname .' '. $student->lastname }}</td>
                   <td>{{$student->grade}}</td>
-                  <td><i class="fa fa-edit"></i></td>
+                  <td><a class="btn btn-warning" href="{{url('admin/view-student')}}">View ..<i class="fa fa-eye"></i></a></td>
                 </tr>
                 @endforeach
               </table>

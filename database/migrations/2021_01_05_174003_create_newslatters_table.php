@@ -16,6 +16,7 @@ class CreateNewslattersTable extends Migration
         Schema::create('newslatters', function (Blueprint $table) {
             $table->id();
             $table->string('sender');
+            $table->string('senderName');
             $table->string('body');
             $table->string('subject');            
             $table->timestamps();

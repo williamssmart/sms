@@ -17,15 +17,15 @@ class CreateGradesTable extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
             $table->string('grade');
-            $table->string('teacher1');
+            $table->string('teacher1')->nullable();
             $table->string('teacher2')->nullable();
-            $table->string('fees');
+            $table->string('tution')->nullable();
             $table->timestamps();
         });
         DB::table('grades')->insert([
-          ['grade' => 'Grade 1', 'teacher1' => '081445837' , 'fees' => '1500'],
-          ['grade' => 'Grade 2', 'teacher1' => '081445837' , 'fees' => '1500' ],
-          ['grade' => 'Grade 3', 'teacher1' => '081445837' , 'fees' => '1500' ],
+          ['grade' => 'Grade 1', 'teacher1' => '081445837' , 'tution' => '1500'],
+          ['grade' => 'Grade 2', 'teacher1' => '081445837' , 'tution' => '1500' ],
+          ['grade' => 'Grade 3', 'teacher1' => '081445837' , 'tution' => '1500' ],
           ]);
     }
 

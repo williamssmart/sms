@@ -88,7 +88,7 @@
         <label>Privilege</label>
         <select name="priv" class="form-control">
           <option value="3">Parent</option>
-          <option class="2">Teacher</option>
+          <option value="2">Teacher</option>
         </select>
       </div>
 

@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Grade;
-use App\Traits\UploadImage;
+use App\Traits\UploadMedia;
 use App\Traits\RegNumberGenarator;
+use Illuminate\Support\Facades\Hash;
 
 class UserManagementController extends Controller
 {
-  use UploadImage;
+  use UploadMedia;
   use RegNumberGenarator;
     /**
      * Display a listing of the resource.
@@ -38,7 +39,8 @@ class UserManagementController extends Controller
           'priv' => 'required'
           ]);
         
-        $user['passport'] = $this->UploadImage($request->file('passport'));
+        $user['passport'] = $this->UploadMedia($request->file('passport'));
+        $user['password'] = Hash::make($request->password);
     
        User::create($user);
       return redirect()->back()->with(['status' => 'user added successfully']);
@@ -49,6 +51,12 @@ class UserManagementController extends Controller
     {
       $grades = Grade::all();
         return view('admin/add-student')->with(['grades' => $grades]);
+    }
+    
+    public function viewStudent(){
+      $student = Student::all();
+      
+      $view('admin/view-student')->with(['student' => $student]);
     }
     
     public function storeStudents(Request $request)
@@ -75,7 +83,7 @@ class UserManagementController extends Controller
          'gradeID' => 'required'
         ]);
         
-        $student['passport'] = $this->UploadImage($request->file('passport'));
+        $student['passport'] = $this->UploadMedia($request->file('passport'));
         $student['regnumber'] = $this->genarator();
    
    
