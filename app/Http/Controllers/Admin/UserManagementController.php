@@ -34,9 +34,10 @@ class UserManagementController extends Controller
           'password' => 'required|min:8|string',
           'dateofbirth' => 'required|date',
           'gender' => 'required|string',
-          'phonenumber' => 'required|string',
+          'phonenumber' => 'required|string|unique:users',
           'passport'=> 'required',
-          'priv' => 'required'
+          'priv' => 'required',
+          'qualification' => 'nullable'
           ]);
         
         $user['passport'] = $this->UploadMedia($request->file('passport'));
@@ -50,13 +51,14 @@ class UserManagementController extends Controller
     public function addStudents()
     {
       $grades = Grade::all();
-        return view('admin/add-student')->with(['grades' => $grades]);
+      $parents = User::where('priv', '=' , 3)->get();
+        return view('admin/add-student')->with(['grades' => $grades,'parents' =>$parents]);
     }
     
     public function viewStudent(){
       $student = Student::all();
       
-      $view('admin/view-student')->with(['student' => $student]);
+      return view('admin/view-student')->with(['student' => $student]);
     }
     
     public function storeStudents(Request $request)

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CourseVideo;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Grade;
 use App\Traits\UploadMedia;
 use App\Traits\DeleteMedia;
 
@@ -31,6 +33,9 @@ class CourseVideoController extends Controller
      */
     public function create()
     {
+      $grades = Grade::where('teacher1', '=',  Auth::user()->id)->orWhere('teacher2','=',Auth::user()->id)->get();
+      
+    //  return $grades;
         return view('teacher/add-video');
     }
 
@@ -46,13 +51,15 @@ class CourseVideoController extends Controller
             'title' => 'required|string|max:150',
             'video' => 'required|mimes:mp4',
             'screenshot' => 'required|mimes:jpg,png,jpeg',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'grade' => 'required'
         ]);
 
         $course_video = new CourseVideo();
-        $course_video->teacher_id = 1 ; //Auth::user()->id;
+        $course_video->teacher_id = Auth::user()->id;
         $course_video->title = $request->title;
         $course_video->description = $request->description;
+        $course_video->grade = $request->grade;
         $screenshot = $request->file('screenshot');
         $video = $request->file('video');
         

@@ -70,6 +70,7 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         //
+        
     }
 
     /**
@@ -80,7 +81,8 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        //
+      
+    
     }
 
     /**

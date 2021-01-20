@@ -82,12 +82,14 @@
           <input name="passport" type="file" class="form-control" required>
         </div>
       </div>
-
       <div class="form-group">
         <label>Parent:</label>
-        <div class="form-group">
-          <input name="parentID" type="text" class="form-control">
-        </div>
+        <select name="parentID" class="form-control">
+          <option>select parent.</option>
+         @foreach ($parents as $parent)
+          <option value="{{$parent->phonenumber}}">{{$parent->firstname . ' '. $parent->lastname . $parent->phonenumber}}</option>
+         @endforeach
+        </select>
       </div>
 
       <div class="form-group">
@@ -117,6 +119,7 @@
       <div class="form-group">
         <label>Class</label>
         <select name="gradeID" class="form-control">
+          <option>select class / grade</option>
          @foreach ($grades as $grade)
           <option value="{{$grade->id}}">{{$grade->grade}}</option>
          @endforeach

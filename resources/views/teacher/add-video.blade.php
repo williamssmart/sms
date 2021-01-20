@@ -34,6 +34,15 @@
           <input name="title" type="text" class="form-control" required>
         </div>
       </div>
+      
+  <div class="form-group">
+        <label>Grade:</label>
+        <div class="form-group">
+         @foreach($grades as $grade)
+          <option value='{{$grade->id}}'>{{$grade->grade}}</option>
+          @endforeach
+        </div>
+      </div>
 
       
       <div class="form-group">
@@ -46,7 +55,7 @@
       <div class="form-group">
         <label>Video Screenshot:</label>
         <div class="form-group">
-          <input name="screenshot" type="file" class="form-controld" required>
+          <input name="screenshot" type="file" class="form-control" required>
         </div>
       </div>
 
@@ -54,7 +63,7 @@
       <div class="form-group">
         <label>Video:</label>
         <div class="form-group">
-          <input name="video" type="file" class="form-controld" required>
+          <input name="video" type="file" class="form-control" required>
         </div>
       </div>
 

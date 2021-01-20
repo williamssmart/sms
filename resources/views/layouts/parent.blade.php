@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin</title>
+  <title>{{$sharedGrade[0]->grade}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
@@ -88,8 +84,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('/teacher/students')}}"><i class="fa fa-link"></i> <span>Students</span></a></li>
-              <li><a href="{{url('/teacher/reset-password')}}"><i class="fa fa-link"></i> <span>change password</span></a></li>
+              <li><a href="{{url('/parent/students')}}"><i class="fa fa-link"></i> <span>Students</span></a></li>
+              <li><a href="{{url('/parent/reset-password')}}"><i class="fa fa-link"></i> <span>change password</span></a></li>
             </ul>
           </li>
 
@@ -100,39 +96,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('/teacher/course-video')}}"><i class="fa fa-link"></i> <span>Video</span></a></li>
-
-              <li><a href="{{url('/teacher/course-video/create')}}"><i class="fa fa-link"></i> <span>Upload Video</span></a></li>
+              @foreach($sharedGrade as $grade)
+              <li><a href="{{url('/parent/course-video/'. $grade->id)}}"><i class="fa fa-book"></i> <span>{{$grade->grade}}</span></a></li>
+               @endforeach
             </ul>
           </li>
 
-          <li class="treeview">
-            <a href="#"><i class="fa fa-envelope-o"></i> <span>Messaging</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="{{url('/teacher/message')}}"><i class="fa fa-link"></i> <span>Inbox</span></a></li>
-              <li><a href="{{url('/teacher/outbox')}}"><i class="fa fa-link"></i> <span>Sent Messages</span></a></li>
-              <li><a href="{{url('/teacher/message/create')}}"><i class="fa fa-link"></i> <span>Compose</span></a></li>
-            </ul>
-          </li>
-
-
-          <li class="treeview">
-            <a href="#"><i class="fa fa-megaphone"></i> <span>Newslatters</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="{{url('/admin/news-inbox')}}"><i class="fa fa-link"></i> <span>Inbox</span></a></li>
-            </ul>
-          </li>
 
           <li>
-            <a href="{{url('admi')}}" onclick="event.preventDefault();
+            <a  onclick="event.preventDefault();
               document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i> <span>LogOut</span></a>
           </li>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -175,86 +147,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <strong>Copyright &copy; 2020 <a href="#">Company</a>.</strong> All rights reserved.
     </footer>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Create the tabs -->
-      <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-        <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-        <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-      </ul>
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <!-- Home tab content -->
-        <div class="tab-pane active" id="control-sidebar-home-tab">
-          <h3 class="control-sidebar-heading">Recent Activity</h3>
-          <ul class="control-sidebar-menu">
-            <li>
-              <a href="javascript:;">
-                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-                <div class="menu-info">
-                  <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                  <p>
-                    Will be 23 on April 24th
-                  </p>
-                </div>
-              </a>
-            </li>
-          </ul>
-          <!-- /.control-sidebar-menu -->
-
-          <h3 class="control-sidebar-heading">Tasks Progress</h3>
-          <ul class="control-sidebar-menu">
-            <li>
-              <a href="javascript:;">
-                <h4 class="control-sidebar-subheading">
-                  Custom Template Design
-                  <span class="pull-right-container">
-                    <span class="label label-danger pull-right">70%</span>
-                  </span>
-                </h4>
-
-                <div class="progress progress-xxs">
-                  <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                </div>
-              </a>
-            </li>
-          </ul>
-          <!-- /.control-sidebar-menu -->
-
-        </div>
-        <!-- /.tab-pane -->
-        <!-- Stats tab content -->
-        <div class="tab-pane" id="control-sidebar-stats-tab">
-          Stats Tab Content
-        </div>
-        <!-- /.tab-pane -->
-        <!-- Settings tab content -->
-        <div class="tab-pane" id="control-sidebar-settings-tab">
-          <form method="post">
-            <h3 class="control-sidebar-heading">General Settings</h3>
-
-            <div class="form-group">
-              <label class="control-sidebar-subheading">
-                Report panel usage
-                <input type="checkbox" class="pull-right" checked>
-              </label>
-
-              <p>
-                Some information about this general settings option
-              </p>
-            </div>
-            <!-- /.form-group -->
-          </form>
-        </div>
-        <!-- /.tab-pane -->
-      </div>
-    </aside>
-    <!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
-      immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
   </div>
   <!-- ./wrapper -->
 

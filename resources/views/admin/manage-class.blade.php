@@ -82,7 +82,7 @@
         <label>Select Teacher Two</label>
         <select name="teacher2" class="form-control">
           @foreach($teachers as $teacher)
-          <option value='{{$teacher->phonenumber}}'>{{$teacher->firstname . ' ' . $teacher->lastname .' ' . $teacher->phonenumber}}</option>
+          <option value='{{$teacher->id}}'>{{$teacher->firstname . ' ' . $teacher->lastname .' ' . $teacher->phonenumber}}</option>
           @endforeach
         </select>
       </div>

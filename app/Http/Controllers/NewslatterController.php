@@ -23,7 +23,7 @@ class NewslatterController extends Controller
      */
     public function create()
     {
-        return view('com')
+        return view('com');
     }
 
     /**
@@ -48,7 +48,7 @@ class NewslatterController extends Controller
        $newslatter->senderName = 'Testing';
        
        $newslatter->save();
-       return redirect()->back()->with('status' => 'saved successfully');
+       return redirect()->back()->with(['status' => 'saved successfully']);
     }
 
     /**
@@ -97,6 +97,6 @@ class NewslatterController extends Controller
         $newslatter = Newslatter::find($id);
         $newslatter->delete();
         
-        return redirect()->back()->with('status' => 'deleted successfully');
+        return redirect()->back()->with(['status' => 'deleted successfully']);
     }
 }
