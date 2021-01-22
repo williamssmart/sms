@@ -1,4 +1,4 @@
-@extends(Auth::user()->priv === '2'?'layouts/admin' : 'layouts/teacher')
+@extends(Auth::user()->priv === '1'?'layouts/admin' : 'layouts/teacher')
 @section('content')
 <!-- /.row -->
 <div class="row">
@@ -48,9 +48,9 @@
             <td>{{$message->id}}</td>
             <td>{{$message->firstname. ' '. $message->lastname}}</td>
             <td>{{$message->subject}}</td>
-            <td>{{$message->body}}</td>
+            <td>{!!html_entity_decode($message->body)!!}</td>
             <td>
-              <form style="display:inline" action="{{ url('/admin/message', ['id' => 1]) }}" method="post">
+              <form style="display:inline" action="{{ url('/admin/message', ['id' => $message->id]) }}" method="post">
                 @method('delete') @csrf
                 <button class="btn btn-danger">Delete Video.. <i class="fa fa-trash"> </i></button>
               </form>

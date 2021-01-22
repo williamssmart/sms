@@ -4,14 +4,6 @@
 
 @csrf
 <div class="box box-danger">
-  @if(['message'])
-  <div class="alert alert-warning alert-dismissible">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <h4><i class="icon fa fa-warning"></i> Alert!</h4>
-    Warning alert preview. This alert is dismissable.
-  </div>
-  @endif
-
   <div class="box-header">
     <h3 class="box-title">password change</h3>
   </div>

@@ -29,9 +29,9 @@
                 @foreach ($students as $student)
                 <tr>
                   <td>{{$student->id}}</td>
-                  <td>{{$student->firstname .' '. $student->lastname }}</td>
+                  <td>{{$student->firstname .' '. $student->lastname}}</td>
                   <td>{{$student->grade}}</td>
-                  <td><a class="btn btn-warning" href="{{url('admin/view-student')}}">View ..<i class="fa fa-eye"></i></a></td>
+                  <td><a class="btn btn-warning" href="{{url('admin/view-student/'.$student->id)}}">View ..<i class="fa fa-eye"></i></a></td>
                 </tr>
                 @endforeach
               </table>

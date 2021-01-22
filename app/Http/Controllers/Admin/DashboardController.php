@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $teacher_count = count(User::where('priv' ,'=',2)->get()); 
         $no_of_females = count(Student::where('gender' ,'=','female')->get()); 
         $no_of_male = count(Student::where('gender' ,'=','male')->get());
-        $no_of_parent = count(Student::where('gender' ,'=',3)->get()); 
+        $no_of_parent = count(User::where('priv' ,'=',3)->get()); 
         
         $count = ['teachers' => $teacher_count, 'female_students'=>$no_of_females, 'male_students'=> $no_of_male, 'parents'=> $no_of_parent];
         
@@ -30,7 +30,7 @@ class DashboardController extends Controller
 
 
     public function student(){
-        $students = Student::join('grades','students.gradeID','=', 'grades.id')->select(['students.id', 'firstname','lastname', 'grade'])->paginate(20);
+        $students = Student::join('grades','students.grade','=', 'grades.grade')->select(['students.id', 'firstname','lastname', 'grades.grade as grade'])->paginate(20);
         return view('admin/students')->with(['students' => $students]);
     }
 

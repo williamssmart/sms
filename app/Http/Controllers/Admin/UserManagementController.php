@@ -37,6 +37,7 @@ class UserManagementController extends Controller
           'phonenumber' => 'required|string|unique:users',
           'passport'=> 'required',
           'priv' => 'required',
+          'address' => 'required|string',
           'qualification' => 'nullable'
           ]);
         
@@ -55,8 +56,8 @@ class UserManagementController extends Controller
         return view('admin/add-student')->with(['grades' => $grades,'parents' =>$parents]);
     }
     
-    public function viewStudent(){
-      $student = Student::all();
+    public function viewStudent($id){
+      $student = Student::find($id);
       
       return view('admin/view-student')->with(['student' => $student]);
     }
@@ -70,9 +71,8 @@ class UserManagementController extends Controller
         'gender' => 'required|string|max:100',
         'bloodgroup' => 'string|max:5',
         'nationality' => 'required|string',
-        'dateofbirth' => 'required',
-        'height' => 'max:15',
-        'weight' => 'max:15',
+        'height' => 'nullable|string|max:15',
+        'weight' => 'nullable|string|max:15',
         'homelanguage'  =>  'nullable|string',
         'icename1'    => 'required|string|max:100',
         'relationship1' => 'required|string|max:100',
@@ -81,13 +81,22 @@ class UserManagementController extends Controller
         'relationship2' => 'nullable|string|max:100',
         'phone2' => 'nullable|string|max:100',
         'passport' => 'required',
-         'parentID' => 'required',
-         'gradeID' => 'required'
+        'parentID' => 'required',
+        'grade' => 'required'
         ]);
+
+        $dateofbirth = $request->dateofbirth;
+        $dateArray = explode('-' , $dateofbirth);
         
+        
+        $student['regNumber'] = $this->genarator();
+        $student['realRegNumber'] = str_replace('/' , '', $student['regNumber']);
+        $student['mmob'] =  $dateArray[1];
+        $student['ddob'] =  $dateArray[2];
+        $student['yyob'] =  $dateArray[0];
         $student['passport'] = $this->UploadMedia($request->file('passport'));
-        $student['regnumber'] = $this->genarator();
-   
+        
+       // return $student;
    
       Student::create($student);
      return redirect()->back()->with(['status' => 'students registered  successfully']);
@@ -95,8 +104,8 @@ class UserManagementController extends Controller
     
     
     public function listUsers(){
-      $user = User::all();
-  
+      $user = User::orderBy('firstname')->paginate(20);
+     // return $user;
       return view('admin/users')->with(['users' => $user]);
     }
     /**

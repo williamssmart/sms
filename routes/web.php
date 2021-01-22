@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::get('admin/users', 'Admin\UserManagementController@listUsers');
 
 Route::group(['middleware' => ['auth','can:isAdmin'], 'prefix' => 'admin'], function () {
   Route::get('/', 'Admin\DashboardController@index');
@@ -23,7 +24,7 @@ Route::group(['middleware' => ['auth','can:isAdmin'], 'prefix' => 'admin'], func
   Route::get('/users', 'Admin\UserManagementController@listUsers');   
   Route::get('/register-student', 'Admin\UserManagementController@addStudents');
   Route::post('/register-student', 'Admin\UserManagementController@storeStudents');
-Route::get('/view-student', 'Admin\UserManagementController@viewStudent');
+Route::get('/view-student/{id}', 'Admin\UserManagementController@viewStudent');
 
  Route::post('session-setting', 'Admin\SettingController@storeSession');
  Route::get('session-setting', 'Admin\SettingController@setSession');
@@ -37,8 +38,10 @@ Route::get('/view-student', 'Admin\UserManagementController@viewStudent');
  
  Route::post('create-grade', 'Admin\SettingController@createClass');
  
-Route::resource('message' , 'MessageController');
-Route::get('outbox' , 'MessageController@outbox');
+});
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+  Route::resource('message' , 'MessageController');
+  Route::get('outbox' , 'MessageController@outbox');   
 });
 
 Route::resource('newslatter' , 'NewslatterController');
@@ -48,7 +51,7 @@ Route::group(['middleware' => ['auth','can:isTeacher'],  'prefix' => 'teacher'],
     Route::get('/', 'Teacher\DashboardController@student');
     Route::get('students', 'Teacher\DashboardController@student');
     Route::get('reset-password', 'Teacher\DashboardController@resetpassword');
-
+    Route::get('view-student/{id}', 'Teacher\DashboardController@viewStudent');
     Route::resource('message' , 'MessageController');
     Route::get('outbox' , 'MessageController@outbox');
   

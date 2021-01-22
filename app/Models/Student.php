@@ -10,13 +10,13 @@ class Student extends Model
     use HasFactory;
     
     protected $fillable = [
-        'firstname', 'gradeID', 'parentID',
+        'firstname', 'grade', 'parentID',
         'middlename',
         'lastname',
         'gender',
         'bloodgroup',
         'nationality' ,
-        'dateofbirth',
+        'mmob','ddob','yyob',
         'height' ,
         'weight' ,
         'homelanguage',
@@ -27,6 +27,6 @@ class Student extends Model
         'relationship2',
         'phone2',
         'passport',
-        'regnumber',
+        'regNumber', 'realRegNumber'
       ];
 }

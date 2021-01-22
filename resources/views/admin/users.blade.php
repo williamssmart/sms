@@ -12,7 +12,6 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tr>
-                  <th>ID</th>
                   <th>Name</th>
                   <th>Email</th>
                   <th>phone</th>
@@ -22,7 +21,6 @@
                 </tr>
                 @foreach ($users as $user)
                 <tr>
-                  <td>{{$user->id}}</td>
                   <td>{{$user->firstname . ' ' . $user->lastname}}</td>
                   <td>{{$user->email}}</td>
                   <td>{{$user->phonenumber}}</td>
@@ -32,6 +30,8 @@
                 </tr>
                 @endforeach
               </table>
+              <span style = 'padding:20px' class='btn d-flex justify-content-center'>{!!$users->links()!!}
+                </span>
             </div>
             <!-- /.box-body -->
           </div>

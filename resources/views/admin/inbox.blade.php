@@ -1,4 +1,4 @@
-@extends(Auth::user()->priv === '2'?'layouts/admin' : 'layouts/teacher')
+@extends(Auth::user()->priv === '1'?'layouts/admin' : 'layouts/teacher')
 
 @section('content')
 

@@ -72,6 +72,7 @@
       <div class="form-group">
         <label>Select Teacher One</label>
         <select name="teacher1" class="form-control">
+        <option>select teacher.. </option>
           @foreach($teachers as $teacher)
           <option value='{{$teacher->phonenumber}}'>{{$teacher->firstname . ' ' . $teacher->lastname .' ' . $teacher->phonenumber}}</option>
           @endforeach
@@ -81,8 +82,9 @@
       <div class="form-group">
         <label>Select Teacher Two</label>
         <select name="teacher2" class="form-control">
+          <option>select teacher.. </option>
           @foreach($teachers as $teacher)
-          <option value='{{$teacher->id}}'>{{$teacher->firstname . ' ' . $teacher->lastname .' ' . $teacher->phonenumber}}</option>
+          <option value='{{$teacher->phonenumber}}'>{{$teacher->firstname . ' ' . $teacher->lastname .' ' . $teacher->phonenumber}}</option>
           @endforeach
         </select>
       </div>

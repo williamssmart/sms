@@ -61,6 +61,13 @@
       </div>
 
       <div class="form-group">
+        <label>Address:</label>
+        <div class="form-group">
+          <input name="address" type="text" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-group">
         <label>Password:</label>
         <div class="form-group">
           <input name="password" type="password" class="form-control" required>

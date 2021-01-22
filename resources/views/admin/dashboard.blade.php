@@ -9,7 +9,7 @@
             <div class="inner">
               <h3>{{$count['teachers']}}</h3>
 
-              <p>Total Students</p>
+              <p>Total Number Of Teachers</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>

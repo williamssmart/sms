@@ -21,9 +21,9 @@ class CourseVideoController extends Controller
      */
     public function index()
     {
-        $video = CourseVideo::where('teacher_id', '=' , 1)->get();
+        $video = CourseVideo::where('teacher_id', '=' , Auth::user()->id)->get();
 
-        return view('teacher/course-video')->with(['course-video' => $video]);
+        return view('teacher/course-video')->with(['videos' => $video]);
     }
 
     /**
@@ -33,10 +33,10 @@ class CourseVideoController extends Controller
      */
     public function create()
     {
-      $grades = Grade::where('teacher1', '=',  Auth::user()->id)->orWhere('teacher2','=',Auth::user()->id)->get();
+      $grades = Grade::where('teacher1', '=', Auth::user()->phonenumber)->orWhere('teacher2','=',Auth::user()->phonenumber)->get();
       
     //  return $grades;
-        return view('teacher/add-video');
+        return view('teacher/add-video')->with(['grades' => $grades]);
     }
 
     /**
@@ -63,7 +63,7 @@ class CourseVideoController extends Controller
         $screenshot = $request->file('screenshot');
         $video = $request->file('video');
         
-        $course_video->screenshot = $this->UploadMedia($screenshot);
+        $course_video->screenshoot = $this->UploadMedia($screenshot);
         $course_video->video_url = $this->UploadMedia($video);
 
         $course_video->save();
@@ -92,7 +92,7 @@ class CourseVideoController extends Controller
     public function edit($id)
     {
         $video = CourseVideo::find($id);
-        return  response(['video' => $video]);
+        //return  response(['video' => $video->title]);
         return view('teacher/edit-video')->with(['video' => $video]);
     }
 

@@ -9,12 +9,12 @@
   </div>
   <div class="col-lg-3 col-sm-6">
     <div> 
-     <h5>Mathematics.</h5>
-     <p> video descriptiondescriptiondescription description description description description description description video descriptiondescriptiondescription description description description video descriptiondescriptiondescription description description description</p>
+     <h5><b>{{$video->title}}</b></h5>
+     <p>{{$video->description}}</p>
      
-     <a style="margin-bottom: 2px" href="{{url('/teacher/course-video/1/edit')}}" class="btn btn-warning">Edit Video.. <i class="fa fa-edit"> </i></a>
+     <a style="margin-bottom: 2px" href="{{url('/teacher/course-video/'.$video->id.'/edit')}}" class="btn btn-warning">Edit Video.. <i class="fa fa-edit"> </i></a>
      
-    <form style="display:inline"  action="{{ url('/teacher/course-video', ['id' => 1]) }}" method="post">
+    <form style="display:inline"  action="{{ url('/teacher/course-video', ['id' => $video->id]) }}" method="post">
      @method('delete') @csrf
       <button class="btn btn-danger">Delete Video.. <i class="fa fa-trash"> </i></button>
     </form>
